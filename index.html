@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Jaime's Macroeconomics Personal Coding Project</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body {font-family: "Lato", sans-serif}
+
+.output-bold {
+  font-weight: 800;
+}
+input {
+  width: 100%;
+}
+#padded {
+  padding: 50px 0px 50px 0px;
+}
+
+</style>
+</head>
+<body>
+
+<!-- Navbar -->
+<div class="w3-top">
+  <div class="w3-bar w3-black w3-card">
+    <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+    
+    <div class="w3-dropdown-hover w3-hide-small">
+      <button class="w3-padding-large w3-button" title="More">Calculate: <i class="fa fa-caret-down"></i></button>     
+      <div class="w3-dropdown-content w3-bar-block w3-card-4">
+        <a href="#nominalGDPSection" class="w3-bar-item w3-button">Nominal GDP</a>
+        <a href="#realGDPSection" class="w3-bar-item w3-button">Real GDP</a>
+        <a href="#deflator" class="w3-bar-item w3-button">GDP Defalator</a>
+        <a href="#cpi" class="w3-bar-item w3-button">CPI</a>
+        <a href="#inflation" class="w3-bar-item w3-button">Inflation Rate</a>
+        <a href="#realIncome" class="w3-bar-item w3-button">Real Income</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Navbar on small screens (remove the onclick attribute if you want the navbar to always show on top of the content when clicking on the links) -->
+<div id="navDemo" class="w3-bar-block w3-black w3-hide w3-hide-large w3-hide-medium w3-top" style="margin-top:46px">
+  <a href="#nominalGDPSection" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">Nominal GDP</a>
+  <a href="#realGDPSection" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">Real GDP</a>
+  <a href="#deflator" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">GDP Deflator</a>
+  <a href="#cpi" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">CPI</a>
+  <a href="#inflation" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">Inflation Rate</a>
+  <a href="#realIncome" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">Real Income</a>
+</div>
+<!-- Page content -->
+<div class="w3-content" style="max-width:2000px;margin-top:46px">
+  <!-- Page Title -->
+  <div class="w3-container w3-light-gray w3-center" id="padded" styles="padding: 50px 0px 50px 0px"><h1>Jay's Macroeconomics Calculator</h1></div>
+
+
+  <!-- The Nominal GDP Calculator Section -->
+  <div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px" id="nominalGDPSection">
+    <h2 class="w3-wide">Calculate Nominal GDP</h2>
+    <table class="w3-table w3-bordered">
+      <thead>
+        <tr>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Consumer Spending</td>
+          <td><input type="number" name="consumerSpending" placeholder="Enter the total Consumer Spending" required></td>
+        </tr>
+        <tr>
+          <td>Business Investment</td>
+          <td><input type="number" name="businessInvestment" placeholder="Enter the total Busines Investments" required></td>
+        </tr>
+        <tr>
+          <td>Government Spending</td>
+          <td><input type="number" name="governmentSpending" placeholder="Enter the total Government Spending" required></td>
+        </tr>
+        <tr>
+          <td>Imports</td>
+          <td><input type="number" name="imports" placeholder="Enter the total value of all Imports" required></td>
+        </tr>
+        <tr>
+          <td>Exports</td>
+          <td><input type="number" name="exports" placeholder="Enter the total value of all Exports" required></td>
+        </tr> 
+      </tbody>
+      <tr>
+    </tr>
+    </table>
+    <button class="w3-button w3-block w3-black" onclick="calculateNominalGDP()">Calculate Nominal GDP</button>
+
+    <div class="results">
+      <table class="w3-table w3-bordered">
+        <thead>
+          <tr>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><h4 class="output-bold">Nominal GDP</h4></td>
+            <td><h4 id="nominalGDP"></h4></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- The Real GDP Calculation Section -->
+  <div class="w3-black" id="realGDPSection">
+    <div class="w3-container w3-content w3-padding-64" style="max-width:800px">
+      <h2 class="w3-wide w3-center">Calculate Real GDP</h2>
+      <h2 class="w3-wide">Calculate Real GDP</h2>
+    <table class="w3-table w3-bordered">
+      <thead>
+        <tr>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Nominal GDP</td>
+          <td><input type="number" name="nominalGDP" placeholder="Enter the Nominal GDP" required></td>
+        </tr>
+        <tr>
+          <td>GDP Deflator (in hundreths)</td>
+          <td><input type="number" name="gdpDeflator" placeholder="Enter the GDP Deflator in hundreths" required></td>
+        </tr>
+      </tbody>
+      <tr>
+    </tr>
+    </table>
+    <button class="w3-button w3-block w3-white" onclick="calculateRealGDP()">Calculate Real GDP</button>
+
+    <div class="results">
+      <table class="w3-table w3-bordered">
+        <thead>
+          <tr>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><h4 class="output-bold">Real GDP</h4></td>
+            <td><h4 id="realGDP"></h4></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    </div>
+  </div>
+
+
+  <!-- The Calculate GDP Deflator Section -->
+  <div id="deflator">
+    <div class="w3-container w3-content w3-padding-64" style="max-width:800px" id="deflator">
+      <div class="w3-container w3-content w3-padding-64" style="max-width:800px">
+        <h2 class="w3-wide w3-center">Calculate GDP Deflator</h2>
+      <table class="w3-table w3-bordered">
+        <thead>
+          <tr>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Real GDP</td>
+            <td><input type="number" name="realGDPForDeflator" placeholder="Enter the Real GDP" required></td>
+          </tr>
+          <tr>
+            <td>Nominal GDP</td>
+            <td><input type="number" name="nominalGDPForDelator" placeholder="Enter the Nomninal GDP" required></td>
+          </tr>
+        </tbody>
+        <tr>
+      </tr>
+      </table>
+      <button class="w3-button w3-block w3-black" onclick="calculateGDPDeflator()">Calculate GDP Deflator</button>
+
+      <div class="results">
+        <table class="w3-table w3-bordered">
+          <thead>
+            <tr>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><h4 class="output-bold">GDP Deflator</h4></td>
+              <td><h4 id="gdpDeflatorOutput"></h4></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- The Calculate CPI Section -->
+  <div class="w3-black" id="cpi">
+    <div class="w3-container w3-content w3-padding-64" style="max-width:800px" id="cpi">
+      <div class="w3-container w3-content w3-padding-64" style="max-width:800px">
+        <h2 class="w3-wide w3-center">Calculate CPI</h2>
+      <table class="w3-table w3-bordered">
+        <thead>
+          <tr>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Cost of Basket in a given year</td>
+            <td><input type="number" name="givenYearBasket" placeholder="Enter the total cost of basket for target year" required></td>
+          </tr>
+          <tr>
+            <td>Cost of Basket in the base year</td>
+            <td><input type="number" name="baseYearBasket" placeholder="Emter the total cost of basket for base year" required></td>
+          </tr>
+        </tbody>
+        <tr>
+      </tr>
+      </table>
+      <button class="w3-button w3-block w3-white" onclick="calculateCPI()">Calculate CPI</button>
+
+      <div class="results">
+        <table class="w3-table w3-bordered">
+          <thead>
+            <tr>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><h4 class="output-bold">CPI for target year</h4></td>
+              <td><h4 id="cpiOutput"></h4></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      </div>
+    </div>
+  </div>
+
+    <!-- The Calculate Inflation Rate Section -->
+    <div id="inflation">
+      <div class="w3-container w3-content w3-padding-64" style="max-width:800px" id="inflation">
+        <div class="w3-container w3-content w3-padding-64" style="max-width:800px">
+          <h2 class="w3-wide w3-center">Calculate Inflation Rate</h2>
+        <table class="w3-table w3-bordered">
+          <thead>
+            <tr>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Price Index (CPI) of this year</td>
+              <td><input type="number" name="cpiThisYear" placeholder="Enter the CPI for this year" required></td>
+            </tr>
+            <tr>
+              <td>Price Index (CPI) of last year</td>
+              <td><input type="number" name="cpiLastYear" placeholder="Enter the CPI for last year" required></td>
+            </tr>
+          </tbody>
+          <tr>
+        </tr>
+        </table>
+        <button class="w3-button w3-block w3-black" onclick="calculateInflationRate()">Calculate Inflation Rate</button>
+  
+        <div class="results">
+          <table class="w3-table w3-bordered">
+            <thead>
+              <tr>
+                <th></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><h4 class="output-bold">Inflation Rate</h4></td>
+                <td><h4 id="gdpDeflatorOutput"></h4></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        </div>
+      </div>
+    </div>
+  
+      <!-- The Calculate Real Income Section -->
+  <div class="w3-black" id="realIncome">
+    <div class="w3-container w3-content w3-padding-64" style="max-width:800px" id="realIncome">
+      <div class="w3-container w3-content w3-padding-64" style="max-width:800px">
+        <h2 class="w3-wide w3-center">Calculate Real Income</h2>
+      <table class="w3-table w3-bordered">
+        <thead>
+          <tr>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Nominal Income</td>
+            <td><input type="number" name="nominalIncome" placeholder="Enter the total nominal income" required></td>
+          </tr>
+          <tr>
+            <td>CPI (in hundreths)</td>
+            <td><input type="number" name="cpiForRealIncome" placeholder="Emter the CPI in hundreths" required></td>
+          </tr>
+        </tbody>
+        <tr>
+      </tr>
+      </table>
+      <button class="w3-button w3-block w3-white" onclick="calculateRealIncome()">Calculate Real Income</button>
+
+      <div class="results">
+        <table class="w3-table w3-bordered">
+          <thead>
+            <tr>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><h4 class="output-bold">Real Income</h4></td>
+              <td><h4 id="realIncomeOutput"></h4></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      </div>
+    </div>
+  </div>
+
+<!-- End Page Content -->
+</div>
+
+<!-- Footer -->
+<footer class="w3-container w3-padding-64 w3-center w3-opacity w3-light-grey w3-xlarge">
+  <p class="w3-medium">Built by <a href="https://jtfreelancing.com/" target="_blank">Jaime Tavares</a> 2023</p>
+</footer>
+
+<script>
+
+// calculate nominal GDP
+function calculateNominalGDP() {
+  if (document.getElementsByName("consumerSpending")[0].value != "" && document.getElementsByName("businessInvestment")[0].value != "" && document.getElementsByName("governmentSpending")[0].value != "" && document.getElementsByName("imports")[0].value != "" && document.getElementsByName("exports")[0].value != "") {
+    var consumerSpending = document.getElementsByName("consumerSpending")[0].value;
+    var businessInvestment = document.getElementsByName("businessInvestment")[0].value;
+    var governmentSpending = document.getElementsByName("governmentSpending")[0].value;
+    var imports = document.getElementsByName("imports")[0].value;
+    var exports = document.getElementsByName("exports")[0].value;
+    var nominalGDP = parseInt(consumerSpending) + parseInt(businessInvestment) + parseInt(governmentSpending) + (parseInt(exports) - parseInt(imports));
+    document.getElementById("nominalGDP").innerHTML = nominalGDP;
+  } else {
+    alert("Please enter all values");
+  }
+}
+
+function calculateRealGDP() {
+  if (document.getElementsByName("nominalGDP")[0].value != "" && document.getElementsByName("gdpDeflator")[0].value != "") {
+    var nominalGDP = document.getElementsByName("nominalGDP")[0].value;
+    var gdpDeflator = document.getElementsByName("gdpDeflator")[0].value;
+    var realGDP = parseInt(nominalGDP) / (parseFloat(gdpDeflator));
+    realGDP = realGDP.toFixed(2);
+    document.getElementById("realGDP").innerHTML = realGDP;
+  } else {
+    alert("Please enter all values");
+  }
+}
+
+function calculateGDPDeflator() {
+  if (document.getElementsByName("realGDPForDeflator")[0].value != "" && document.getElementsByName("nominalGDPForDelator")[0].value != "") {
+    var realGDP = document.getElementsByName("realGDPForDeflator")[0].value;
+    var nominalGDP = document.getElementsByName("nominalGDPForDelator")[0].value;
+    var gdpDeflator = (parseFloat(nominalGDP) / parseFloat(realGDP));
+    document.getElementById("gdpDeflatorOutput").innerHTML = gdpDeflator * 100 + " &emsp; or &emsp; " + gdpDeflator + "%";
+  } else {
+    alert("Please enter all values");
+  }
+}
+
+function calculateCPI() {
+  if (document.getElementsByName("givenYearBasket")[0].value != "" && document.getElementsByName("baseYearBasket")[0].value != "") {
+    var givenYearBasket = document.getElementsByName("givenYearBasket")[0].value;
+    var baseYearBasket = document.getElementsByName("baseYearBasket")[0].value;
+    var cpi = (parseFloat(givenYearBasket) / parseFloat(baseYearBasket));
+    document.getElementById("cpiOutput").innerHTML = cpi * 100;
+  } else {
+    alert("Please enter all values");
+  }
+}
+
+function calculateInflationRate() {
+  if (document.getElementsByName("cpiThisYear")[0].value != "" && document.getElementsByName("cpiLastYear")[0].value != "") {
+    var cpiThisYear = document.getElementsByName("cpiThisYear")[0].value;
+    var cpiLastYear = document.getElementsByName("cpiLastYear")[0].value;
+    var inflationRate = (parseFloat(cpiThisYear) - parseFloat(cpiLastYear)) / parseFloat(cpiLastYear);
+    document.getElementById("inflationRateOutput").innerHTML = inflationRate * 100 + " &emsp; or &emsp; " + inflationRate + "%";
+  } else {
+    alert("Please enter all values");
+  }
+}
+
+function calculateRealIncome() {
+  if (document.getElementsByName("nominalIncome")[0].value != "" && document.getElementsByName("cpiForRealIncome")[0].value != "") {
+    var nominalIncome = document.getElementsByName("nominalIncome")[0].value;
+    var cpiForRealIncome = document.getElementsByName("cpiForRealIncome")[0].value;
+    var realIncome = (parseFloat(nominalIncome) / parseFloat(cpiForRealIncome));
+    document.getElementById("realIncomeOutput").innerHTML = realIncome;
+  } else {
+    alert("Please enter all values");
+  }
+}
+
+</script>
+
+</body>
+</html>
